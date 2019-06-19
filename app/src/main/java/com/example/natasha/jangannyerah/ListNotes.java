@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -22,24 +24,26 @@ public class ListNotes extends AppCompatActivity {
     static final int REQUEST_CODE_ADD_NOTES = 101;
     static final int RESULT_CODE_ADD_NOTES = 201;
 
-    private static final String TAG = "ListNotes";
-    ListView listview;
-    ArrayList<Konten> kontenList = new ArrayList<>();
-    FloatingActionButton FB_add;
-
+    private RecyclerView recyclerView;
     private KontenListAdapter adapter;
+    private ArrayList<Konten> kontenArrayList = new ArrayList<>();
+    FloatingActionButton FB_add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_notes);
 
-        Log.d(TAG, "OnCreate: Started.");
+        recyclerView = findViewById(R.id.rv);
 
-        listview = findViewById(R.id.lv);
+        adapter = new KontenListAdapter(kontenArrayList);
 
-        adapter = new KontenListAdapter(this, R.layout.activity_detail_notes, kontenList);
-        listview.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListNotes.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+//        adapter = new KontenListAdapter(this, R.layout.activity_detail_notes, kontenList);
+//        listview.setAdapter(adapter);
 
 //        Toast.makeText(getApplicationContext(), "Data Tersimpan", Toast.LENGTH_SHORT).show();
 
@@ -63,7 +67,7 @@ public class ListNotes extends AppCompatActivity {
                 data.getStringExtra("description")
             );
 
-            kontenList.add(konten);
+            kontenArrayList.add(konten);
             adapter.notifyDataSetChanged();
         }
     }
