@@ -9,9 +9,9 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText edit_text;
+    EditText et_title, et_notes;
     Button btn;
-    String st;
+    String st1, st2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +19,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn = (Button) findViewById(R.id.BTN);
-        edit_text = (EditText) findViewById(R.id.ET);
+        et_title = (EditText) findViewById(R.id.ET1);
+        et_notes = (EditText) findViewById(R.id.ET2);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MainActivity.this, ListNotes.class);
+                Intent intent = getIntent();
 
-                st = edit_text.getText().toString();
-                intent.putExtra("Value", st);
-                startActivity(intent);
+                st1 = et_title.getText().toString();
+                st2 = et_notes.getText().toString();
+                intent.putExtra("title", st1);
+                intent.putExtra("description", st2);
+                setResult(ListNotes.RESULT_CODE_ADD_NOTES, intent);
                 finish();
             }
         });
