@@ -6,15 +6,11 @@ import android.os.Bundle;
 public class Konten {
 
     private String title, addnotes;
+    private boolean isSelected;
 
     public Konten(String title, String addnotes){
         this.title = title;
         this.addnotes = addnotes;
-//        this.date = date;
-    }
-
-    public Konten() {
-
     }
 
     public String getTitle() {
@@ -40,6 +36,14 @@ public class Konten {
                 ", addnotes='" + addnotes + '\'' +
 //                ", date='" + date + '\'' +
                 '}';
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     //    private String data;

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,7 +28,9 @@ public class ListNotes extends AppCompatActivity {
     private RecyclerView recyclerView;
     private KontenListAdapter adapter;
     private ArrayList<Konten> kontenArrayList = new ArrayList<>();
-    FloatingActionButton FB_add;
+    private FloatingActionButton FB_add;
+    private Button btnDel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +44,6 @@ public class ListNotes extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListNotes.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-//        adapter = new KontenListAdapter(this, R.layout.activity_detail_notes, kontenList);
-//        listview.setAdapter(adapter);
-
-//        Toast.makeText(getApplicationContext(), "Data Tersimpan", Toast.LENGTH_SHORT).show();
 
 
         FB_add = findViewById(R.id.FBadd);
